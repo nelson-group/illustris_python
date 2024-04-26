@@ -29,7 +29,6 @@ def getNumPart(header):
 
     nPart = np.zeros(nTypes, dtype=np.int64)
     for j in range(nTypes):
-        print(j, nPart.dtype)
         nPart[j] = header['NumPart_Total'][j] | (header['NumPart_Total_HighWord'][j] << 32)
 
     return nPart
