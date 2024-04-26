@@ -23,12 +23,13 @@ def snapPath(basePath, snapNum, chunkNum=0):
 def getNumPart(header):
     """ Calculate number of particles of all types given a snapshot header. """
     if 'NumPart_Total_HighWord' not in header:
-        return header['NumPart_Total'] # new uint64 convention
+        return np.int64(header['NumPart_Total']) # new uint64 convention
 
     nTypes = 6
 
     nPart = np.zeros(nTypes, dtype=np.int64)
     for j in range(nTypes):
+        print(j, nPart.dtype)
         nPart[j] = header['NumPart_Total'][j] | (header['NumPart_Total_HighWord'][j] << 32)
 
     return nPart
